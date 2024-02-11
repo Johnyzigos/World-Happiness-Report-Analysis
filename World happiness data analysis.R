@@ -4,7 +4,7 @@ library(tidyverse)
 library(ggplot2)
 
 # Load the World Happiness Report dataset
-happiness_data <- read.csv("C:/Users/johny/Documents/Προγραμματισμός/project ideas/happiness report/happiness_report.csv", header = TRUE, sep = ",")
+happiness_data <- read.csv("C:/Users/johny/Documents/Προγραμματισμός/MY PROJECTS DATA SCIENCE/happiness report analysis in R/happiness_report.csv", header = TRUE, sep = ",")
 
 #Check the class of data
 class(happiness_data)
@@ -81,4 +81,22 @@ happiness_data <- mutate(happiness_data, Social_Support_Group = ifelse(`Social.s
 t_test_result <- t.test(happiness_data$Score ~ happiness_data$Social_Support_Group)
 t_test_result
 
+#Create a world map
+install.packages("sf")
+library(sf)
+world_map <- st_read("C:/Users/johny/Documents/Προγραμματισμός/MY PROJECTS DATA SCIENCE/happiness report analysis in R/ne_50m_admin_0_map_units/ne_50m_admin_0_map_units.shp")
 
+# Merge the datasets based on the country names
+merged_data <- merge(world_map, happiness_data, by.x = "ADMIN", by.y = "Country.or.region", all.x = TRUE)
+
+str(merged_data)
+
+# Create a world map with colored regions based on happiness scores
+ggplot(merged_data) +
+  geom_sf(aes(fill = Score), color = "white", size = 0.1) +
+  scale_fill_viridis_c(name = "Happiness Score", option = "C", direction = -1) +  # Reverse color direction
+  theme_minimal() +
+  labs(title = "World Happiness Map",
+       subtitle = "Colored regions based on happiness scores",
+       fill = "Happiness Score") +
+  theme(legend.position = "bottom")
