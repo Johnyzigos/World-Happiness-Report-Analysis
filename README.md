@@ -13,6 +13,8 @@ This project explores the World Happiness Report dataset using R, specifically f
 # correlation matrix
 ![Rplot04](https://github.com/Johnyzigos/World-Happiness-Report-Analysis/assets/142905030/ee07867b-dea3-4e83-892b-064e9f2303f6)
 
+# World Map based on happiness report dataset
+![World happiness map](https://github.com/Johnyzigos/World-Happiness-Report-Analysis/assets/142905030/83739f9e-fd62-49d4-a0bf-e6db87449aeb)
 
 
 
